@@ -55,7 +55,7 @@ def start_spark_container(
     cmd.open_port(7077)       # Spark Master
     cmd.open_port(7337)       # Spark Shuffle Service
     cmd.open_port(4040)       # Job UI
-    cmd.open_port(18080)     # Spark History Server UI
+    cmd.open_port(18080)      # Spark History Server UI
     cmd.open_port(3022)       # Docker SSH
 
     if plugins:

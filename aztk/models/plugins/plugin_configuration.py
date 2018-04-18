@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import List, Union
 from aztk.internal import ConfigurationBase
+from aztk.error import InvalidPluginConfigurationError
 from .plugin_file import PluginFile
 
 class PluginTarget(Enum):
@@ -26,8 +27,7 @@ class PluginPort:
         :param name: [Optional] name to differentiate ports if you have multiple
     """
 
-    def __init__(self, internal: int, public: Union[int, bool] = False, name=None):
-
+    def __init__(self, internal: int, public: Union[int, bool]=False, name=None):
         self.internal = internal
         self.expose_publicly = bool(public)
         self.public_port = None
@@ -54,13 +54,13 @@ class PluginConfiguration(ConfigurationBase):
 
     def __init__(self,
                  name: str,
-                 ports: List[PluginPort] = None,
-                 files: List[PluginFile] = None,
-                 execute: str = None,
+                 ports: List[PluginPort]=None,
+                 files: List[PluginFile]=None,
+                 execute: str=None,
                  args=None,
                  env=None,
-                 target_role: PluginTargetRole = PluginTargetRole.Master,
-                 target: PluginTarget = PluginTarget.SparkContainer):
+                 target_role: PluginTargetRole=PluginTargetRole.Master,
+                 target: PluginTarget=PluginTarget.SparkContainer):
         self.name = name
         # self.docker_image = docker_image
         self.target = target
@@ -82,3 +82,11 @@ class PluginConfiguration(ConfigurationBase):
             "name",
             "execute",
         ])
+
+        if not isinstance(self.target, PluginTarget):
+            raise InvalidPluginConfigurationError(
+                "Target must be of type Plugin target but was {0}".format(self.target))
+
+        if not isinstance(self.target_role, PluginTargetRole):
+            raise InvalidPluginConfigurationError(
+                "Target role must be of type Plugin target role but was {0}".format(self.target))
