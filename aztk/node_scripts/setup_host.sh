@@ -2,13 +2,13 @@
 
 # Entry point for the start task. It will install all dependencies and start docker.
 # Usage:
-# setup_host.sh [container_name] [gpu_enabled] [docker_repo] [docker_cmd]
+# setup_host.sh [container_name] [docker_repo_name]
 
 export AZTK_WORKING_DIR=/mnt/batch/tasks/startup/wd
 export PYTHONUNBUFFERED=TRUE
 
 container_name=$1
-repo_name=$2
+docker_repo_name=$2
 
 echo "Installing pre-reqs"
 apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual
@@ -55,8 +55,8 @@ else
     docker login $DOCKER_ENDPOINT --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
 fi
 
-echo "Pulling $repo_name"
-(time docker pull $repo_name) 2>&1
+echo "Pulling $docker_repo_name"
+(time docker pull $docker_repo_name) 2>&1
 
 # Unzip resource files and set permissions
 apt-get -y install unzip
@@ -83,7 +83,7 @@ else
     export PYTHONPATH=$PYTHONPATH:$AZTK_WORKING_DIR
 
     echo "Running setup python script"
-    python3 $(dirname $0)/main.py setup-node $repo_name
+    python3 $(dirname $0)/main.py setup-node $docker_repo_name
 
     # wait until container is running
     until [ "`/usr/bin/docker inspect -f {{.State.Running}} $container_name`"=="true" ]; do
