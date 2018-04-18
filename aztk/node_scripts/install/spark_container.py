@@ -4,11 +4,10 @@ from aztk.internal import DockerCmd
 from aztk.utils import constants
 
 def start_spark_container(
-        docker_repo: str = None,
-        gpu_enabled: bool = False,
-        file_mounts = None,
-        plugins = None,
-        mixed_mode = False):
+        docker_repo: str=None,
+        gpu_enabled: bool=False,
+        file_mounts=None,
+        plugins=None):
 
     cmd = DockerCmd(
         name=constants.DOCKER_SPARK_CONTAINER_NAME,
