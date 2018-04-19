@@ -4,11 +4,10 @@ from aztk.internal import DockerCmd
 from aztk.utils import constants
 
 def start_spark_container(
-        docker_repo: str = None,
-        gpu_enabled: bool = False,
-        file_mounts = None,
-        plugins = None,
-        mixed_mode = False):
+        docker_repo: str=None,
+        gpu_enabled: bool=False,
+        file_mounts=None,
+        plugins=None):
 
     cmd = DockerCmd(
         name=constants.DOCKER_SPARK_CONTAINER_NAME,
@@ -55,7 +54,7 @@ def start_spark_container(
     cmd.open_port(7077)       # Spark Master
     cmd.open_port(7337)       # Spark Shuffle Service
     cmd.open_port(4040)       # Job UI
-    cmd.open_port(18080)     # Spark History Server UI
+    cmd.open_port(18080)      # Spark History Server UI
     cmd.open_port(3022)       # Docker SSH
 
     if plugins:

@@ -73,3 +73,17 @@ AZTK provide a few environment variables that can be used in your plugin script
 * `AZTK_IS_MASTER`: Is the plugin running on the master node
 * `AZTK_IS_WORKER`: Is a worker setup on the current node(This might also be a master if you have `worker_on_master` set to true)
 * `AZTK_MASTER_IP`: Internal ip of the master
+
+## Debug your plugin
+When your plugin is not working as expected there is a few things you do to invesigate issues
+
+Check the logs, you can either use the debug tool or [BatchLabs](https://github.com/Azure/BatchLabs)
+Navigate to `startup/wd/logs/plugins`
+![](misc/plugin-logs.png)
+
+* Now if you see a file named `<your-plugin-name>.txt` under that folder it means that your plugin started correctly and you can check this file to see what you execute script logged.
+* IF this file doesn't exists this means the script was not run on this node. There could be multiple reasons for this:
+  - If you want your plugin to run on the spark container check the `startup/wd/logs/docker.log` file for information about this
+  - If you want your plugin to run on the host check the `startup/stdout.txt` and `startup/stderr.txt`
+
+  The log could mention you picked the wrong target or target role for that plugin which is why this plugin is not running on this node.
