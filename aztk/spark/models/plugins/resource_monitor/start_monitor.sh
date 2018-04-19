@@ -6,8 +6,11 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR
 
+echo "InfluxDB password is $INFLUXDB_USER_PASSWORD"
+echo "InfluxDB password is $GF_SECURITY_ADMIN_PASSWORD"
+
 # Install pip requirements
-echo "Install pip requirements  "
+echo "Install pip requirements"
 #sudo chmod 777 requirements.txt
 pip3 install -r requirements.txt
 
