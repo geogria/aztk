@@ -6,7 +6,7 @@ from aztk.utils import constants
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class ResourceMonitorPlugin(PluginConfiguration):
-    def __init__(self, influxdb_password="password", grafana_password="password"):
+    def __init__(self):
         super().__init__(
             name="resource_monitor",
             ports=[
@@ -34,9 +34,5 @@ class ResourceMonitorPlugin(PluginConfiguration):
                 PluginFile("requirements.txt", os.path.join(dir_path, "requirements.txt")),
                 PluginFile("resource_monitor_dashboard.json",
                     os.path.join(dir_path, "resource_monitor_dashboard.json")),
-            ],
-            env=dict(
-                INFLUXDB_USER_PASSWORD=influxdb_password,
-                GF_SECURITY_ADMIN_PASSWORD=grafana_password
-            )
+            ]
         )
