@@ -18,4 +18,4 @@ echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stabl
 
 echo "Run telegraf"
 apt-get update && sudo apt-get install telegraf
-telegraf --config etc/telegraf.conf
+telegraf --config telegraf.conf

@@ -28,11 +28,7 @@ class ResourceMonitorPlugin(PluginConfiguration):
             execute="start_monitor.sh",
             files=[
                 PluginFile("start_monitor.sh", os.path.join(dir_path, "start_monitor.sh")),
-                PluginFile(".env", os.path.join(dir_path, ".env")),
+                PluginFile("telegraf.conf", os.path.join(dir_path, "telegraf.conf")),
                 PluginFile("docker-compose.yml", os.path.join(dir_path, "docker-compose.yml")),
-                PluginFile("nodestats.py", os.path.join(dir_path, "nodestats.py")),
-                PluginFile("requirements.txt", os.path.join(dir_path, "requirements.txt")),
-                PluginFile("resource_monitor_dashboard.json",
-                    os.path.join(dir_path, "resource_monitor_dashboard.json")),
             ]
         )
