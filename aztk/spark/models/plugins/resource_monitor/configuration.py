@@ -15,11 +15,11 @@ class ResourceMonitorPlugin(PluginConfiguration):
                     public=True,
                 ),
                 PluginPort(
-                    internal=8083,
+                    internal=8086,
                     public=True,
                 ),
                 PluginPort(
-                    internal=8086,
+                    internal=8888,
                     public=True,
                 ),
             ],
@@ -28,7 +28,7 @@ class ResourceMonitorPlugin(PluginConfiguration):
             execute="start_monitor.sh",
             files=[
                 PluginFile("start_monitor.sh", os.path.join(dir_path, "start_monitor.sh")),
-                PluginFile("telegraf.conf", os.path.join(dir_path, "telegraf.conf")),
+                PluginFile("etc/telegraf.conf", os.path.join(dir_path, "telegraf.conf")),
                 PluginFile("docker-compose.yml", os.path.join(dir_path, "docker-compose.yml")),
             ]
         )
