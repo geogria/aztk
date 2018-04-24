@@ -6,10 +6,8 @@
 #  - aztk/python:spark2.1.0-python3.6.2-base
 #  - aztk/python:spark2.1.0-python3.6.2-gpu
 
-echo "Is master: $AZTK_IS_MASTER"
-
-if  [ "$AZTK_IS_MASTER" = "1" ]; then
-    conda install -c conda-force jupyterlab -y
+if  [ "$AZTK_IS_MASTER" = "true" ]; then
+    conda install -c conda-force jupyterlab
 
     PYSPARK_DRIVER_PYTHON="/.pyenv/versions/${USER_PYTHON_VERSION}/bin/jupyter"
     JUPYTER_KERNELS="/.pyenv/versions/${USER_PYTHON_VERSION}/share/jupyter/kernels"
