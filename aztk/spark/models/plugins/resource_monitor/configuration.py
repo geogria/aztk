@@ -11,10 +11,6 @@ class ResourceMonitorPlugin(PluginConfiguration):
             name="resource_monitor",
             ports=[
                 PluginPort(
-                    internal=3000,
-                    public=True,
-                ),
-                PluginPort(
                     internal=8086,
                     public=True,
                 ),
