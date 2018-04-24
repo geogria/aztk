@@ -39,14 +39,14 @@ def _plugins_dir():
 
 def _run_on_this_node(plugin_obj, target: PluginTarget, is_master, is_worker):
 
-    print("Running plugin {} in {} on {}".format(
+    print("Loading plugin {} in {} on {}".format(
         plugin_obj["execute"],
         plugin_obj['target'],
         plugin_obj['target_role']
     ))
 
     if plugin_obj['target'] != target.value:
-        print("Ignoring plugin", plugin_obj["execute"], "as target is for ", plugin_obj['target'], "but is currently running in ", target.value)
+        print("Ignoring ", plugin_obj["execute"], "as target is for ", plugin_obj['target'], "but is currently running in ", target.value)
         return False
 
     if plugin_obj['target_role'] == PluginTargetRole.Master.value and is_master is True:
