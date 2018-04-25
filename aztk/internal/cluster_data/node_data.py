@@ -46,7 +46,7 @@ class NodeData:
             return
         if isinstance(file, (str, bytes)):
             full_file_path = Path(file)
-            with io.open(file, 'r', encoding='ISO-8859-1') as f:
+            with io.open(file, 'r', encoding='UTF-8') as f:
                 if binary:
                     self.zipf.write(file, os.path.join(zip_dir, full_file_path.name))
                 else:
@@ -69,8 +69,7 @@ class NodeData:
             relative_folder = os.path.relpath(base, path)
             for file in files:
                 if self._includeFile(file, exclude):
-                    with io.open(os.path.join(base, file), 'r', encoding='ISO-8859-1') as f:
-                        self.zipf.writestr(os.path.join(dest, relative_folder, file), f.read().replace('\r\n', '\n'))
+                    self.add_file(os.path.join(base, file), os.path.join(dest, relative_folder), binary = False)
 
     def _add_custom_scripts(self):
         data = []
@@ -82,7 +81,7 @@ class NodeData:
                 new_file_name = str(index) + '_' + os.path.basename(custom_script.script)
                 data.append(dict(script=new_file_name, runOn=str(custom_script.run_on)))
                 try:
-                    with io.open(custom_script.script, 'r', encoding='ISO-8859-1') as f:
+                    with io.open(custom_script.script, 'r', encoding='UTF-8') as f:
                         self.zipf.writestr(
                             os.path.join(CUSTOM_SCRIPT_FOLDER, new_file_name),
                             f.read().replace('\r\n', '\n'))
@@ -154,7 +153,7 @@ class NodeData:
         return zipf
 
     def _add_node_scripts(self):
-        self.add_dir(os.path.join(ROOT_PATH, NODE_SCRIPT_FOLDER), NODE_SCRIPT_FOLDER, exclude=['*.pyc*'])
+        self.add_dir(os.path.join(ROOT_PATH, NODE_SCRIPT_FOLDER), NODE_SCRIPT_FOLDER, exclude=['*.pyc*', '*.png'])
 
     def _includeFile(self, filename: str, exclude: List[str] = []) -> bool:
         for pattern in exclude:

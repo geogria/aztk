@@ -4,7 +4,6 @@ azure-mgmt-storage==1.5.0
 azure-storage-blob==1.1.0
 pyyaml==3.12
 pycryptodome==3.4.7
-paramiko==2.4.0
 
 # There is a breaking change is 3.0.0 of this package and the depenency chain of other package is not defined correcly
 SecretStorage==2.3.1
