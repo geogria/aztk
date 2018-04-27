@@ -4,6 +4,8 @@ The resource monitor plugin is useful for tracking performance counters on the c
 
 This plugin takes advanage of the TICK monitoring stack. For more information please visit the [influx data](https://www.influxdata.com/time-series-platform/) web page.
 
+> **IMPORTANT** All of the data is collected on the cluster's master node and will be lost once the cluster is thrown away. To persist data we recommend pushing to an off-cluster InfluxDB instance. Currently there is no supported way to persist the data from this plugin.
+
 ## Setup
 
 Update your cluster.yaml file to include the plugin as follows:
