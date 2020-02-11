@@ -150,7 +150,9 @@ main () {
     export LC_ALL=C.UTF-8
     export LANG=C.UTF-8
     # ensure these packages are  compatibile before upgrading
-    python3 -m pip install pip=="18.0" pipenv=="2018.7.1"
+    python3 -m pip install pip=="18.0"
+    python3 -m pip install setuptools=="45.2.0"
+    python3 -m pip install pipenv=="2018.7.1"
     mkdir -p $AZTK_WORKING_DIR/.aztk-env
     cp $AZTK_WORKING_DIR/aztk/node_scripts/Pipfile $AZTK_WORKING_DIR/.aztk-env
     cp $AZTK_WORKING_DIR/aztk/node_scripts/Pipfile.lock $AZTK_WORKING_DIR/.aztk-env
