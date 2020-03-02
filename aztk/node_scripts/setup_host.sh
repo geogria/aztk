@@ -73,7 +73,15 @@ pull_docker_container () {
 
 install_python_dependencies () {
     echo "Installing python dependencies"
-    pipenv install --python /usr/bin/python3.5m --ignore-pipfile
+    echo "Need to use python >= 3.6 to avoid context manager error!!"
+    # update python 3.5 to python 3.7
+    add-apt-repository ppa:deadsnakes/ppa -y &&
+    apt-get update &&
+    apt install python3.7 -y
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+    update-alternatives  --set python3  /usr/bin/python3.7
+
+    pipenv install --python /usr/bin/python3.7m --ignore-pipfile
     pip --version
     echo "Finished installing python dependencies"
 }
@@ -153,6 +161,7 @@ main () {
     python3 -m pip install pip=="18.0"
     python3 -m pip install setuptools=="45.2.0"
     python3 -m pip install pipenv=="2018.7.1"
+    python3 -m pip install --ignore-installed PyYAML=="5.3"
     mkdir -p $AZTK_WORKING_DIR/.aztk-env
     cp $AZTK_WORKING_DIR/aztk/node_scripts/Pipfile $AZTK_WORKING_DIR/.aztk-env
     cp $AZTK_WORKING_DIR/aztk/node_scripts/Pipfile.lock $AZTK_WORKING_DIR/.aztk-env
